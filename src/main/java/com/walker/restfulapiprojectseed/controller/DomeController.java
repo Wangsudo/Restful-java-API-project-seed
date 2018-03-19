@@ -15,15 +15,15 @@ public class DomeController {
      */
     @PostMapping(value = "test_api")
     public R api1(@RequestBody Api1Req req, @RequestHeader("head_name") Object name) {
-        return R.SUCCESS;
+        return R.ok().getMsg("成功了");
     }
 
     /**
      * @param param
      */
     @GetMapping(value = "test_api2")
-    public void api2(@RequestParam(value = "getParam", required = false) Object param) {
-
+    public R api2(@RequestParam(value = "getParam", required = false) Object param) {
+        return R.ok().getMsg("sad");
     }
 
     /**
@@ -31,12 +31,12 @@ public class DomeController {
      * @return
      */
     @GetMapping(value = "testAspect")
-    public R test(){
+    public R<UserVo> test(){
         UserVo userVo = new UserVo();
         userVo.setId(1);
         userVo.setName("walker");
         userVo.setSex("man");
-        return new R(userVo);
+        return new R<>(userVo);
     }
 
 
@@ -48,12 +48,12 @@ public class DomeController {
      * @return
      */
     @GetMapping(value = "testAspectArgs")
-    public R test(@RequestParam("id")Integer id,@RequestParam("name")String name,@RequestParam("sex")String sex){
+    public R<UserVo> test(@RequestParam("id")Integer id, @RequestParam("name")String name, @RequestParam("sex")String sex){
         UserVo userVo = new UserVo();
         userVo.setId(id);
         userVo.setName(name);
         userVo.setSex(sex);
-        return new R(userVo);
+        return new R<>(userVo);
     }
 
     /**
@@ -62,9 +62,9 @@ public class DomeController {
      * @return
      */
     @PostMapping(value = "testAspectArgs")
-    public R test(@RequestBody UserVo userVo){
+    public R<UserVo> test(@RequestBody UserVo userVo){
         userVo.setName(userVo.getName()+"shun");
-        return new R(userVo);
+        return new R<>(userVo);
     }
 
 

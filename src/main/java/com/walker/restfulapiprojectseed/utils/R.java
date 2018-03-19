@@ -6,27 +6,33 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 固定返回类型
  * Created by wangshun on 2018/3/18
  **/
-public class R {
-    public static final R SUCCESS = new R(1000, "success");
-    public static final R SYSTEM_BUSY = new R(2000, "The system is too busy,please try again later");
+public class R <T> {
     //序列化errorCode 属性为 error_code
     @JsonProperty("error_code")
     private Integer errorCode;
     @JsonProperty("error_Msg")
     private String errorMsg;
     @JsonProperty("extra")
-    private Object extra;
+    private T extra;
 
-    public R(Integer errorCode, String errorMsg) {
+    private R(Integer errorCode, String errorMsg) {
         this.errorCode = errorCode;
         this.errorMsg = errorMsg;
     }
 
-    public R(Object extra) {
-        this.errorCode = 1000;
-        this.errorMsg = "success";
+    public R(T extra) {
+        this.errorCode = ErroCodeSet.SUCCESS;
+        this.errorMsg = ErroCodeSet.SUCCESS_MSG;
         this.extra = extra;
 
+    }
+
+    public static R ok(){
+        return new R(ErroCodeSet.SUCCESS,ErroCodeSet.SUCCESS_MSG);
+    }
+
+    public R getMsg(String msg){
+        return new R(ErroCodeSet.SUCCESS,msg);
     }
 
     public Integer getErrorCode() {
@@ -49,7 +55,7 @@ public class R {
         return extra;
     }
 
-    public void setExtra(Object extra) {
+    public void setExtra(T extra) {
         this.extra = extra;
     }
 }
