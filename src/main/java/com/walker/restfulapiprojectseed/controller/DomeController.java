@@ -2,13 +2,14 @@ package com.walker.restfulapiprojectseed.controller;
 
 import com.walker.restfulapiprojectseed.pojo.Api1Req;
 import com.walker.restfulapiprojectseed.pojo.UserVo;
+import com.walker.restfulapiprojectseed.redis.utils.QueueUtils;
 import com.walker.restfulapiprojectseed.utils.R;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/base_url/")
 public class DomeController {
-
     /**
      * @param req
      * @param name
@@ -67,6 +68,12 @@ public class DomeController {
         return new R<>(userVo);
     }
 
+
+
+    @PostMapping(value = "sendMessage")
+    public void testRedis(){
+        QueueUtils.sendMessage("wang","shun");
+    }
 
 
 }

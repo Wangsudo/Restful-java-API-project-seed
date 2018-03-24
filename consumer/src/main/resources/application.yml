@@ -1,0 +1,12 @@
+server:
+  tomcat.max-threads: 0
+  tomcat.uri-encoding: UTF-8
+
+spring:
+    profiles:
+        active: dev
+    redis:
+      host: 127.0.0.1
+      port: 6379
+
+
