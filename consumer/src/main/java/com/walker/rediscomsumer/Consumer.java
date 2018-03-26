@@ -8,8 +8,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  **/
 @SpringBootApplication
 public class Consumer {
-
+    private static final Logger Logger = LoggerFactory.getLogger(Consumer.class);
+    
     public static void main(String[] args){
         SpringApplication.run(Consumer.class);
+    }
+    
+    @Bean
+    CommandLineRunner startServer(){
+        return args->{
+            logger.info("start);
+            Iservice.startUp();
+        }
     }
 }
