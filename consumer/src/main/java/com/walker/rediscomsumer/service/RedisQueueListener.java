@@ -5,5 +5,7 @@ package com.walker.rediscomsumer.service;
  **/
 public interface RedisQueueListener<T> {
 
-    public void onMessage(T value);
+    void onMessage(T value);
+    
+    void startup();
 }
