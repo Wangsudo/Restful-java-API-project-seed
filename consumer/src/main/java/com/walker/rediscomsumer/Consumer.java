@@ -10,6 +10,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Consumer {
     private static final Logger Logger = LoggerFactory.getLogger(Consumer.class);
     
+    @Autowired
+    private RedisQueueListener queueListener;
+    
     public static void main(String[] args){
         SpringApplication.run(Consumer.class);
     }
@@ -18,7 +21,7 @@ public class Consumer {
     CommandLineRunner startServer(){
         return args->{
             logger.info("start);
-            Iservice.startUp();
+            queueListener.startUp();
         }
     }
 }
